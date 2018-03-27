@@ -95,6 +95,19 @@ class ProjectHelper:
         self.open_project_page()
         self.project_cache = None
 
+    def delete_project_by_id(self, id):
+        wd = self.app.wd
+        self.open_project_page()
+        self.open_project_by_id(id)
+        wd.find_element_by_css_selector("input[value='Delete Project']").click()
+        wd.find_element_by_css_selector("input[value='Delete Project']").click()
+        self.open_project_page()
+        self.project_cache = None
+
     def open_project_by_index(self, index):
         wd = self.app.wd
         wd.find_elements_by_xpath("//a[contains(@href, 'manage_proj_edit_page.php?project_id=')]")[index].click()
+
+    def open_project_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_xpath("//a[contains(@href, 'manage_proj_edit_page.php?project_id=%s' )]" % id).click()
